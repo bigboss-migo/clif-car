@@ -13,8 +13,8 @@ const linkClass = ({ isActive }) =>
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
-  useEffect(() => setOpen(false), [pathname]);
+  const { key } = useLocation();
+  useEffect(() => setOpen(false), [key]);
 
   return (
     <header data-testid="site-header" className="sticky top-0 z-50">

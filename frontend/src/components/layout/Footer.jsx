@@ -9,7 +9,7 @@ const heading = "mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-prim
 const link = "text-sm opacity-80 transition-opacity hover:opacity-100";
 
 export const Footer = () => (
-  <footer data-testid="site-footer" className="bg-chrome text-chrome-foreground">
+  <footer data-testid="site-footer" className="border-t-4 border-primary bg-chrome text-chrome-foreground">
     <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-[2fr_1fr_1fr]">
       <div>
         <Logo testId="footer-logo" />

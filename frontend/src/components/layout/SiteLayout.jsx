@@ -5,12 +5,12 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 
 const useScrollOnNavigate = () => {
-  const { pathname, hash } = useLocation();
+  const { key, hash } = useLocation();
   useEffect(() => {
     const target = hash && document.getElementById(hash.slice(1));
     if (target) target.scrollIntoView();
     else window.scrollTo(0, 0);
-  }, [pathname, hash]);
+  }, [key, hash]);
 };
 
 export default function SiteLayout() {

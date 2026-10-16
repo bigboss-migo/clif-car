@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend-only layout testing (desktop 1920, tablet 768/1023, mobile 390) via Playwright on public URL. Nearly all requirements pass: / -> /process redirect, all 4 routes in layout with header+footer, active nav (text-primary + aria-current), sticky header, breakpoint visibility (announcement md+, desktop nav lg+, hamburger <lg, sticky bar <md), PrequalButton nav/mobile/primary href/target=_blank/rel='noopener noreferrer'/label 'Pre-Qualify'/svg after text, header/footer/mobile/sticky CTAs -> /contact#get-started and scroll to #get-started below the sticky header, footer socials (6, new tab, noopener), legal links href='#', copyright text exact, FooterLegal comment present, no iframes, no console errors, no horizontal overflow, footer legal bar ends exactly at sticky bar top (not hidden). Found 2 minor bugs, both about navigation within the same pathname.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Header/MobileMenu", "issue": "Mobile menu does not close when the target has the same pathname as the current page. It only closes on a pathname change (useEffect deps [pathname]). Repro at 390px: on /contact open the menu and tap 'Get Your Dream Car' (/contact#get-started). The URL and scroll update, but the menu stays open and covers the screen. Same thing happens when you tap 'Contact' while on /contact#get-started, or 'The Process' while on /process.", "selector": "[data-testid='mobile-menu-get-started-btn'], [data-testid^='mobile-nav-link-']", "priority": "MEDIUM"},
+      {"component": "SiteLayout useScrollOnNavigate", "issue": "Clicking a Get Your Dream Car CTA a second time when the URL is already /contact#get-started (after scrolling back to the top) does nothing, because pathname and hash are unchanged so the effect does not re-run. scrollY stays 0.", "selector": "[data-testid='mobile-sticky-get-started-btn'], [data-testid='header-get-started-btn']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Header.jsx: close the mobile menu on every navigation. Either add onClick={() => setOpen(false)} to the MobileMenu links and CTA (pass an onNavigate prop), or key the effect on location.key / [pathname, hash].",
+    "SiteLayout.jsx useScrollOnNavigate: add location.key to the effect deps so repeat clicks on /contact#get-started scroll to the section again."
+  ],
+  "critical_code_review_comments": [
+    "site.phoneHref is the placeholder '[TEL LINK]' (not a tel: URI). Replace it before launch; all phone links currently point to a relative path.",
+    "The review request lists the test id 'legal-link-build-foundation-28', but the actual ids are legal-link-privacy-policy / terms-of-use / consumer-disclosures / accessibility. This is a typo in the request, not a code issue.",
+    "frontend/.env REACT_APP_BACKEND_URL is build-foundation-28.preview.emergentagent.com, while the request mentioned a 2c20ef0c... URL. Testing was done on the .env URL."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "~92% (2 minor same-path navigation bugs)"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Layout verified at 1920/1023/768/390. Pages are placeholders, so desktop pages are short; inject a tall div to test the sticky header. Re-check that the mobile menu closes on same-path navigation and that repeat CTA clicks scroll to #get-started.",
+  "rca of the issue": "Header useEffect(() => setOpen(false), [pathname]) ignores hash and same-path navigation. SiteLayout scroll effect depends on [pathname, hash] only, so re-navigating to an identical URL does not trigger it."
+}
