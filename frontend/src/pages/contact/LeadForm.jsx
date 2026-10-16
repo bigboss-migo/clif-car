@@ -15,7 +15,7 @@ const Progress = ({ step }) => (
     aria-valuemax={100}
     aria-valuenow={step * 50}
     data-testid="lead-progress"
-    className="mt-6 h-1.5 w-full bg-muted"
+    className="mt-6 h-1.5 w-full bg-border"
   >
     <div className="h-full bg-primary transition-[width] duration-500" style={{ width: `${step * 50}%` }} />
   </div>

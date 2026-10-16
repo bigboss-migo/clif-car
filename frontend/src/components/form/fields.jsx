@@ -31,11 +31,11 @@ export const Field = ({ id, label, error, hint, optional, className, children })
 );
 
 export const TextInput = ({ id, error, hint, className, ...props }) => (
-  <input {...a11y(id, error, hint)} className={cn(fieldClass(error), className)} {...props} />
+  <input {...a11y(id, error, hint)} className={cn(fieldClass(error), "h-12 py-0", className)} {...props} />
 );
 
 export const SelectInput = ({ id, error, hint, className, children, ...props }) => (
-  <select {...a11y(id, error, hint)} className={cn(fieldClass(error), className)} {...props}>
+  <select {...a11y(id, error, hint)} className={cn(fieldClass(error), "h-12 py-0", className)} {...props}>
     {children}
   </select>
 );

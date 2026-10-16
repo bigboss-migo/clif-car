@@ -55,6 +55,13 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - PageHero h1 now text-4xl on mobile (sm:text-5xl md:text-7xl) to prevent long-word overflow
 - Pending: newsletter form, calculator embed, FAQ
 
+## Implemented — Contact page + lead form Step 1 (2026-06)
+- /contact: hero, contact cards (phone/socials/prequal), #get-started form section with progress bar
+- Shared form field system components/form/fields.jsx (Field, TextInput, SelectInput, TextArea, Checkbox, ToggleGroup)
+- Step 1 fields + validation (pages/contact/leadForm.js), countries config, phone formatting (lib/phone.js), consent copy (attorney review comment)
+- Single form-state object mirrors /api/lead payload; query prefill + quoted payment note; Step 2 placeholder; nothing submitted yet
+- Note: backend phone validator requires 7-15 digits while non-US frontend allows 6-14 -> reconcile when wiring submit
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required
