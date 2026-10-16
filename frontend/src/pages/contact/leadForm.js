@@ -115,3 +115,15 @@ export const validateStep2 = (v) => {
   if (v.heardAbout === REFERRAL_OPTION && !v.referralName.trim()) e.referralName = "Let us know who sent you.";
   return e;
 };
+
+// Shape the form state into the /api/lead "lead" payload.
+export const buildLeadPayload = (v) => {
+  const { vehicleModelCustom, ...rest } = v;
+  return {
+    ...rest,
+    type: "lead",
+    source: "contact",
+    vehicleModel: v.vehicleModel === OTHER_MODEL ? vehicleModelCustom.trim() : v.vehicleModel,
+    referralName: v.heardAbout === REFERRAL_OPTION ? v.referralName.trim() : "",
+  };
+};
