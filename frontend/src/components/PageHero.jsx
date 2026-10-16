@@ -21,7 +21,7 @@ export const PageHero = ({ eyebrow, title, intro, image, id = "page" }) => (
       {eyebrow && <Eyebrow data-testid={`${id}-hero-eyebrow`}>{eyebrow}</Eyebrow>}
       <h1
         data-testid={`${id}-page-heading`}
-        className="mt-4 max-w-4xl text-5xl uppercase leading-[0.95] tracking-wide md:text-7xl"
+        className="mt-4 max-w-4xl break-words text-4xl uppercase leading-[0.95] tracking-wide sm:text-5xl md:text-7xl"
       >
         {title}
       </h1>
