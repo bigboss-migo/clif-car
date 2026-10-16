@@ -84,6 +84,12 @@ export const leaseTaxMethods = {
 };
 export const defaultLeaseTaxMethod = "monthly";
 
+export const leaseTaxMethodLabels = {
+  monthly: "Tax added to each monthly payment",
+  upfront_total: "Tax on total lease payments, due at signing",
+  upfront_selling: "Tax on the selling price, due at signing",
+};
+
 // Editable calculator defaults and option lists (illustrative).
 export const calculatorDefaults = {
   creditTier: "prime",
@@ -95,6 +101,6 @@ export const calculatorDefaults = {
     mileageOptions: [7500, 10000, 12000, 15000],
     residualPct: 58,
     residualRange: { min: 40, max: 75 },
-    acquisitionFee: 895,
+    acquisitionFee: 995,
   },
 };

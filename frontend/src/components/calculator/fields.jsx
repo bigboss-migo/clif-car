@@ -1,4 +1,4 @@
-const control =
+export const calcControl =
   "block w-full rounded-md border border-input bg-background px-3 py-2.5 text-base text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30";
 
 const Label = ({ htmlFor, children }) => (
@@ -26,7 +26,7 @@ export const NumberField = ({ id, label, value, onChange, prefix = "$", step = 1
         onChange={(e) => onChange(e.target.value.replace("-", ""))}
         onKeyDown={(e) => ["-", "e", "E", "+"].includes(e.key) && e.preventDefault()}
         data-testid={`calc-input-${id}`}
-        className={`${control} ${prefix ? "pl-7" : ""}`}
+        className={`${calcControl} ${prefix ? "pl-7" : ""}`}
       />
     </div>
   </div>
@@ -40,7 +40,7 @@ export const SelectField = ({ id, label, value, onChange, options }) => (
       value={value}
       onChange={(e) => onChange(e.target.value)}
       data-testid={`calc-select-${id}`}
-      className={`mt-2 ${control}`}
+      className={`mt-2 ${calcControl}`}
     >
       {options.map((o) => (
         <option key={o.value} value={o.value}>{o.label}</option>

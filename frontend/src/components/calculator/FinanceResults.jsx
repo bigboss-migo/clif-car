@@ -1,6 +1,6 @@
 import { formatPct, formatUsd } from "@/lib/format";
 
-const Row = ({ label, value, strong, testId }) => (
+export const Row = ({ label, value, strong, testId }) => (
   <div className="flex items-baseline justify-between gap-4 border-b border-ink-foreground/10 py-3 last:border-b-0">
     <dt className="text-sm text-ink-muted">{label}</dt>
     <dd data-testid={testId} className={`tabular-nums ${strong ? "font-bold text-ink-foreground" : "text-ink-foreground"}`}>

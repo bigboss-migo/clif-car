@@ -15,7 +15,7 @@ export default function CalculatorPage() {
         image={site.heroImages.calculator}
         eyebrow="Calculator"
         title={<>Run the <Highlight>numbers</Highlight></>}
-        intro="Adjust price, down payment, credit profile and term to see a live monthly estimate, with every tax and fee shown."
+        intro="Switch between finance and lease, then adjust price, down payment, credit profile and term to see a live monthly estimate, with every tax and fee shown."
       />
       <section className="border-b border-border">
         <div className="mx-auto max-w-7xl px-5 py-16 md:py-20">
