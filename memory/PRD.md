@@ -45,6 +45,11 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - src/lib/finance.js: pure calcFinance / calcLease (brokerFee from site.js); lease dueAtSigning = cashDown + first payment + upfront tax + title/reg
 - Vitest: src/lib/finance.test.js (`yarn test`, 10 passing)
 
+## Implemented — Calculator page + finance mode (2026-06)
+- /calculator: PageHero + PaymentCalculator (components/calculator/*), live calcFinance, results panel, disclaimer
+- Lease toggle present; lease fields/results pending (Prompt 6B)
+- lib/format.js for USD/percent display; negative input blocked
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required

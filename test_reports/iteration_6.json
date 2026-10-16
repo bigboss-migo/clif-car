@@ -1,0 +1,24 @@
+{
+  "summary": "Frontend-only test of /calculator PaymentCalculator (finance mode). All requested checks passed: defaults, live recalculation, edge cases (blank/0 price, cleared cash down, cash down > price), state change (Texas), tier/term change, lease toggle placeholder and restore, 2-col layout at 1920 / stacked at 390 with no horizontal overflow, card radius 4px / inputs+selects+toggle 2px, page title, other pages unaffected, zero console errors. vitest 10/10 pass.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "NumberField (calc-input-*)", "issue": "Negative values (e.g. cash down -5000) can be typed; finance.js clamps to 0 so results are safe ($0 due at signing) but the input keeps showing -5000, so the input and the results disagree. min=0 only affects the spinner.", "selector": "[data-testid=calc-input-cashDown]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": ["Optional: clamp or reject negative numbers in NumberField onChange (or show a validation hint)"],
+  "critical_code_review_comments": [
+    "Code is clean: small focused components, testids present, toNum + money() guards stop NaN/Infinity, formatUsd/formatPct fall back to 0 for non-finite values.",
+    "The Due at signing row shows only cash down. Title/reg and fees are rolled into the amount financed. That is consistent but could be explained in the UI.",
+    "Price 0 with default cash down still shows doc/title/broker fees and $15,000 due at signing. This is acceptable, but cash down does not re-derive when the price changes (by design, since it is only the initial 10%)."
+  ],
+  "updated_files": ["/app/test_reports/iteration_6.json"],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Verified values: defaults $2,573/mo, AF $149,215, tax $12,795, doc $175, title $250, broker $995, DAS $15,000, interest $36,021, TOP $185,236. Cash cleared -> AF $164,215, $2,831/mo. Entrepreneur+60 -> 11.9% APR, $3,312/mo. Texas -> tax $9,375, doc $225, title $120, AF $145,715. Lease mode is still a placeholder; when it is implemented, test calcLease UI. '/' redirects to /process (title 'The Process')."
+}

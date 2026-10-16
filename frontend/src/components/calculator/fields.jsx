@@ -23,7 +23,8 @@ export const NumberField = ({ id, label, value, onChange, prefix = "$", step = 1
         min="0"
         step={step}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value.replace("-", ""))}
+        onKeyDown={(e) => ["-", "e", "E", "+"].includes(e.key) && e.preventDefault()}
         data-testid={`calc-input-${id}`}
         className={`${control} ${prefix ? "pl-7" : ""}`}
       />
