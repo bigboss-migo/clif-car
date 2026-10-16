@@ -4,8 +4,10 @@ import { AlertCircle } from "lucide-react";
 import { Eyebrow } from "@/components/Eyebrow";
 import { PrimaryButton, SecondaryButton } from "@/components/buttons";
 import { formatUsd } from "@/lib/format";
-import { initialLeadState, validateStep1 } from "@/pages/contact/leadForm";
+import site from "@/config/site";
+import { initialLeadState, validateStep1, validateStep2 } from "@/pages/contact/leadForm";
 import { Step1 } from "@/pages/contact/Step1";
+import { Step2 } from "@/pages/contact/Step2";
 
 const Progress = ({ step }) => (
   <div
@@ -31,11 +33,15 @@ const QuotedNote = ({ value }) => {
   );
 };
 
-const Step2Placeholder = ({ onBack }) => (
-  <div data-testid="lead-step-2" className="border border-dashed border-border p-8 text-center">
-    <p className="font-display text-2xl">Coming next</p>
-    <p className="mt-2 text-sm text-muted-foreground">Vehicle details will go here.</p>
-    <SecondaryButton onClick={onBack} className="mt-6" data-testid="lead-back-btn">Back</SecondaryButton>
+const Step2Actions = ({ onBack }) => (
+  <div className="mt-10">
+    <div className="flex flex-col-reverse gap-3 sm:flex-row">
+      <SecondaryButton onClick={onBack} className="sm:w-40" data-testid="lead-back-btn">Back</SecondaryButton>
+      <PrimaryButton type="submit" className="flex-1 py-4" data-testid="lead-submit-btn">Send My Request</PrimaryButton>
+    </div>
+    <p className="mt-4 text-center text-sm text-muted-foreground">
+      Prefer to apply for financing directly? Use {site.prequalLabel} above.
+    </p>
   </div>
 );
 
@@ -61,14 +67,20 @@ export const LeadForm = () => {
     scrollToTop();
   };
 
-  const next = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const errs = validateStep1(values);
+    const errs = step === 1 ? validateStep1(values) : validateStep2(values);
     setErrors(errs);
     const invalid = Object.keys(errs).length > 0;
     setShowBanner(invalid);
-    if (invalid) scrollToTop();
-    else goTo(2);
+    if (invalid) return scrollToTop();
+    if (step === 1) goTo(2);
+    // Step 2 valid: final submission is wired in the next prompt.
+  };
+  const back = () => {
+    setErrors({});
+    setShowBanner(false);
+    goTo(1);
   };
 
   return (
@@ -79,7 +91,7 @@ export const LeadForm = () => {
         Takes about two minutes. Everything you send goes straight to the team. (Step {step} of 2)
       </p>
       <Progress step={step} />
-      <form noValidate onSubmit={next} data-testid="lead-form" className="mt-10">
+      <form noValidate onSubmit={handleSubmit} data-testid="lead-form" className="mt-10">
         {values.quotedPayment && <QuotedNote value={values.quotedPayment} />}
         {showBanner && Object.keys(errors).length > 0 && (
           <div role="alert" data-testid="lead-error-banner" className="mb-8 flex items-center gap-3 border border-destructive bg-destructive/10 px-5 py-4 text-sm font-semibold text-destructive">
@@ -95,7 +107,10 @@ export const LeadForm = () => {
             </PrimaryButton>
           </>
         ) : (
-          <Step2Placeholder onBack={() => goTo(1)} />
+          <>
+            <Step2 values={values} errors={errors} setField={setField} />
+            <Step2Actions onBack={back} />
+          </>
         )}
       </form>
     </div>

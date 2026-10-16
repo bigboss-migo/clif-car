@@ -94,8 +94,8 @@ class LeadPayload(_Base):
     @classmethod
     def _phone_digits(cls, v: str) -> str:
         digits = re.sub(r"[\s().\-+]", "", v)
-        if not digits.isdigit() or not 7 <= len(digits) <= 15:
-            raise ValueError("must be 7-15 digits")
+        if not digits.isdigit() or not 6 <= len(digits) <= 15:
+            raise ValueError("must be 6-15 digits")
         return digits
 
     @field_validator("countryCode")
