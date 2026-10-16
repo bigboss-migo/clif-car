@@ -1,0 +1,27 @@
+{
+  "summary": "Frontend-only Playwright testing of the design-system hardening pass, run on the .env URL (build-foundation-28) at 1920, 768 and 390. Every requested feature passes. Titles: each route has a unique '<Page> | [BRAND NAME] AUTO' title. Meta: there is exactly 1 title and 1 meta[name=description] after every navigation, and the content updates. Fonts: body is Figtree; h1 and footer h2 are Outfit 700 uppercase, and document.fonts loads both. Colors: header background is oklab ink at 0.95 alpha with blur(12px), sticky, z-50. Primary button background and eyebrow color both equal --primary. Buttons and prequal buttons have 0px radius; buttons use 14px 28px padding, 12px text, 0.2em tracking. Hero uses the stage-gradient. Logo is 48px on desktop and 40px on mobile. h1 is 72px on desktop and 48px on mobile. Navigation scrolls to top. Every Get Your Dream Car CTA (header, footer, mobile menu, sticky bar, ClosingCTA) lands on /contact#get-started, including repeat clicks. The section top sits 15px below the header bottom: 120 vs 105 on desktop and 82 vs 67 on mobile. This was checked both with natural page height and with a 3000px spacer injected, so the offset is real and not capped by max scroll. Direct load of /contact#get-started gives the same position. Mobile: the menu opens and closes via the toggle (aria-expanded correct), closes on link tap including same-path taps, and the CTA closes it. The sticky bar is 73px with a 48px phone button. The footer legal bar ends 55px above the sticky bar. No horizontal overflow. main padding-bottom is 72px on mobile and 0 at md and up. Announcement md+, desktop nav lg+, PrequalButton attributes, socials opening in a new tab, and legal '#' links all still work. No console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Mobile (<md) all pages", "issues": ["Bottom padding is doubled. main has pb-[72px+safe-area] and the footer also has pb-[72px+safe-area]. On mobile this leaves an empty 72px background band between the last section (e.g. ClosingCTA) and the dark footer (seen on /contact at 390). Only one of them is needed. The footer padding is what keeps the legal bar clear of the sticky bar: without it the footer's py-14 is shorter than the 73px bar. Consider dropping main's padding, or the footer's if main must keep it per spec, and check the legal bar again."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional: remove the duplicated mobile bottom padding (main + footer) to get rid of the 72px gap above the footer on mobile."
+  ],
+  "critical_code_review_comments": [
+    "useHeaderHeight observes the inner div, which excludes the header's 1px border-b, so --header-h is 1px short (104 vs 105). This is harmless because of the +16px scroll-padding.",
+    "useScrollOnNavigate calls scrollIntoView synchronously in useEffect. It works now because the target renders in the same commit. Lazy or async sections would need requestAnimationFrame or a retry.",
+    "site.phoneHref '[TEL LINK]' and the hero images are still placeholders (known)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% (1 minor design note)"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iteration 3 verified the design tokens, SEO tags, scroll and hash offset, and the mobile behaviours. Pages are short, so inject a tall spacer before the footer to verify the hash offset properly. Use the URL from frontend/.env.",
+  "rca of the issue": "Double padding: SiteLayout main and Footer both apply pb-[calc(72px+env(safe-area-inset-bottom))] md:pb-0."
+}

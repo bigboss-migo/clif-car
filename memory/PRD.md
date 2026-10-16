@@ -21,6 +21,14 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - config/nav.js holds nav links and Get Started CTA; /contact#get-started anchor via ClosingCTA on Contact page
 - Hash scroll + menu close on every navigation (location.key)
 
+## Implemented — Design system hardening (2026-06)
+- OKLCH tokens in index.css; Tailwind colors via color-mix (opacity modifiers work); radius sm 0 / md 2px / lg 4px
+- Figtree body, Outfit display (h1-h3 700 uppercase); .stage-gradient utility; 16px inputs <768px
+- Hardened Eyebrow, PageHero (+Highlight), buttons, PrequalButton variants (nav/mobile share navStyles.js), ClosingCTA, new Section + Seo components
+- Header/Footer/Mobile bar restyled; per-page title + meta (React 19 hoisting)
+- Hash scroll offset via html scroll-padding-top + measured --header-h
+- Note: main and footer both carry mobile bottom padding (spec requires main) -> 72px band above footer on mobile
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required
