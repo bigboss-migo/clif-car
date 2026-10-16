@@ -1,4 +1,4 @@
-import { formatPct, formatUsd } from "@/lib/format";
+import { formatPct, formatUsd, formatUsdCents } from "@/lib/format";
 import { Row } from "@/components/calculator/FinanceResults";
 
 const Summary = ({ result }) => {
@@ -13,9 +13,9 @@ const Summary = ({ result }) => {
       </div>
       <div className="p-4">
         <p className="text-[0.65rem] font-bold uppercase tracking-[0.16em] text-ink-muted">Per $1,000 MSRP</p>
-        <p data-testid="lease-per-1k" className="font-display mt-2 text-2xl tabular-nums">{formatUsd(per1k)}</p>
-        <p data-testid="lease-one-pct" className={`mt-1 text-xs font-semibold ${per1k <= 10 ? "text-primary" : "text-ink-muted"}`}>
-          {per1k <= 10 ? "Beats the 1% rule" : "Above the 1% rule"}
+        <p data-testid="lease-per-1k" className="font-display mt-2 text-2xl tabular-nums">{formatUsdCents(per1k)}</p>
+        <p data-testid="lease-one-pct" className={`mt-1 text-xs font-semibold ${result.msrp > 0 && per1k <= 10 ? "text-primary" : "text-ink-muted"}`}>
+          {result.msrp <= 0 ? "Enter an MSRP" : per1k <= 10 ? "Beats the 1% rule" : "Above the 1% rule"}
         </p>
       </div>
     </div>

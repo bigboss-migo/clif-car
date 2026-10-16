@@ -68,6 +68,11 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - Query prefill normalized onto options (make/model/budget brackets)
 - Send My Request validates only; submission (submitLead + vehicleModelCustom mapping) pending next prompt
 
+## Implemented — Calculator lease mode (2026-06)
+- LeaseFields, LeaseResults (summary: effective payment, per $1k MSRP / 1% rule), MoneyFactorField (Edit/Auto), ResidualSlider
+- Separate finance vs lease keys (price/cashDown/term vs leasePrice/leaseCashDown/leaseTerm); shared trade-in, incentives, state, tier
+- leaseTaxMethodLabels in config; acquisition fee default 995
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required

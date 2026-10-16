@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only test of /calculator lease mode (Playwright at 1920 and 390, plus vitest). All requested features work: lease defaults ($1,902/mo, subline '36 mo · 10,000 mi/yr · MF 0.00285 (6.84% APR)', residual hint 58.0% / $92,220, NY tax label), state tax-method switching (CA monthly tax $157 and $2,056/mo; TX upfront tax $9,375), mileage adjustment (15k gives 55.5%, $88,245, $2,001/mo), slider updates live (65 gives 62.5% / $99,375), MF Edit/Auto (prefill 0.00285, custom 0.001 gives MF 0.00100 (2.40% APR), stays custom when tier changes, Auto restores sub 0.00520), tier change updates mf-readonly when not custom, 1% rule caption flips (cash down 60k gives 'Beats the 1% rule'), finance defaults unchanged ($2,573/mo, 72 months at 7.4% APR), finance and lease terms independent and kept when switching modes, blank fields show no NaN/Infinity, minus sign stripped, no horizontal overflow (390 and 1920), 2 columns on desktop and stacked on mobile, no console errors. yarn test: 10/10 passed (vitest).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "LeaseResults Summary", "issue": "Per $1,000 MSRP is shown in whole dollars (formatUsd), so the default shows '$12' instead of ~$11.96. Near the boundary, values like $10.40 display as '$10' next to 'Above the 1% rule', which looks contradictory. Use 2 decimals.", "selector": "[data-testid='lease-per-1k']", "priority": "LOW"},
+      {"component": "MoneyFactorField", "issue": "When the custom MF input is blank, the results fall back to the tier MF (subline shows MF 0.00285), but the helper text under the field shows '≈ 0.00% APR equivalent'. The two displays disagree.", "selector": "[data-testid='mf-field']", "priority": "LOW"},
+      {"component": "LeaseResults Summary", "issue": "When MSRP and selling price are both blank (msrp=0), per-1k shows $0 with 'Beats the 1% rule', which is misleading. Consider showing a dash or hiding the caption when msrp <= 0.", "selector": "[data-testid='lease-one-pct']", "priority": "LOW"},
+      {"component": "MoneyFactorField input", "issue": "The custom MF input has no onKeyDown guard like NumberField. The minus sign is stripped by replace, but 'e'/'+' can still be typed.", "selector": "[data-testid='calc-input-customMF']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/frontend/src/lib/finance.test.js"],
+  "action_items": [
+    "Optional: format lease-per-1k with 2 decimals",
+    "Optional: MoneyFactorField APR helper should use the effective MF (tier fallback) when the custom value is blank",
+    "Optional: handle msrp=0 in the per-1k caption",
+    "Optional: add the same keydown guard to the customMF input"
+  ],
+  "critical_code_review_comments": [
+    "PaymentCalculator passes toNum() numbers to calcLease, so the lib's fallbacks (e.g. acquisitionFee default 995 when invalid) never apply for blank input; blank becomes 0. This is consistent and fine, just noting it.",
+    "mfEdit prefills with lease.tier.leaseMoneyFactor via closure; works correctly."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% of requested checks (4 low-priority polish items)"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Lease mode fully verified in iteration 10. Use 'yarn test' (vitest), not '--watchAll'. Expected values: NY default $1,902, CA $2,056 (monthly tax $157), TX $1,904 (upfront $9,375), 15k miles $2,001, custom MF 0.001 gives $1,478."
+}

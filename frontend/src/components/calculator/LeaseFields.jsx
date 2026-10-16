@@ -24,6 +24,7 @@ export const LeaseFields = ({ values, set, result, onMfEdit, onMfAuto }) => (
       <NumberField id="acquisitionFee" label="Acquisition fee" value={values.acquisitionFee} onChange={set("acquisitionFee")} step={50} />
       <MoneyFactorField
         tierMf={result.tier.leaseMoneyFactor}
+        effectiveMf={result.moneyFactor}
         custom={values.mfCustom}
         value={values.customMF}
         onEdit={onMfEdit}

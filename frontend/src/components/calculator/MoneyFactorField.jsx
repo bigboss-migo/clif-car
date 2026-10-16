@@ -1,7 +1,7 @@
 import { calcControl } from "@/components/calculator/fields";
 
-export const MoneyFactorField = ({ tierMf, custom, value, onEdit, onAuto, onChange }) => {
-  const mf = custom ? Number(value) || 0 : tierMf;
+export const MoneyFactorField = ({ tierMf, effectiveMf, custom, value, onEdit, onAuto, onChange }) => {
+  const mf = effectiveMf;
   return (
     <div data-testid="mf-field">
       <div className="flex items-center justify-between">
@@ -25,6 +25,7 @@ export const MoneyFactorField = ({ tierMf, custom, value, onEdit, onAuto, onChan
           aria-label="Custom money factor"
           value={value}
           onChange={(e) => onChange(e.target.value.replace("-", ""))}
+          onKeyDown={(e) => ["-", "e", "E", "+"].includes(e.key) && e.preventDefault()}
           data-testid="calc-input-customMF"
           className={`mt-2 ${calcControl}`}
         />
