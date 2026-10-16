@@ -60,7 +60,13 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - Shared form field system components/form/fields.jsx (Field, TextInput, SelectInput, TextArea, Checkbox, ToggleGroup)
 - Step 1 fields + validation (pages/contact/leadForm.js), countries config, phone formatting (lib/phone.js), consent copy (attorney review comment)
 - Single form-state object mirrors /api/lead payload; query prefill + quoted payment note; Step 2 placeholder; nothing submitted yet
-- Note: backend phone validator requires 7-15 digits while non-US frontend allows 6-14 -> reconcile when wiring submit
+- Backend phone validator aligned to 6-15 digits (frontend: US/CA 10, others 6-14)
+
+## Implemented — Lead form Step 2 (2026-06)
+- config/formOptions.js (years, makes, colors, budget/down/credit/timeline/trade-in/heard-about options) + config/vehicleModels.js
+- Step2.jsx with dependent make/model (+ Other custom model), conditional referral name, notes; validateStep2; Back/Next state preserved
+- Query prefill normalized onto options (make/model/budget brackets)
+- Send My Request validates only; submission (submitLead + vehicleModelCustom mapping) pending next prompt
 
 ## Backlog
 - P1: Real page content per route; finalize theme tokens

@@ -237,3 +237,15 @@ class TestMailerUnit:
         monkeypatch.setattr(m.resend.Emails, "send", boom)
         with pytest.raises(m.MailerError):
             asyncio.run(m.send_submission(newsletter(), "ip", "ua"))
+
+
+# --- iteration 9: phone min length aligned to 6 digits
+class TestPhoneSixDigits:
+    def test_six_digit_phone_passes_validation(self):
+        r = post(lead(phone="123456"))
+        assert r.status_code == 500, r.text  # passes validation, fails on missing RESEND key
+
+    def test_five_digit_phone_400(self):
+        r = post(lead(phone="12345"))
+        assert r.status_code == 400
+        assert "phone: must be 6-15 digits" in r.json()["error"]
