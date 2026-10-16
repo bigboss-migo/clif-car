@@ -29,6 +29,12 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - Hash scroll offset via html scroll-padding-top + measured --header-h
 - Note: main and footer both carry mobile bottom padding (spec requires main) -> 72px band above footer on mobile
 
+## Implemented — Lead email endpoint (2026-06)
+- POST /api/lead (server.py, lead_models.py, lead_mailer.py, rate_limit.py): lead/newsletter Pydantic models, 20KB JSON limit, honeypot, 5/IP/10min in-memory limit, Resend SDK send (HTML table + text), CORS from CORS_ORIGINS
+- Client IP from X-Forwarded-For at -TRUSTED_PROXY_HOPS (3 on preview) to stop spoofing
+- frontend/src/lib/submitLead.js; backend/.env.example; README Resend setup
+- RESEND_API_KEY / LEAD_TO_EMAIL empty: user will add later (sends return 500 until then)
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required

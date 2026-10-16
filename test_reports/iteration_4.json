@@ -1,0 +1,30 @@
+{
+  "summary": "Backend-only test of POST /api/lead (lead + newsletter). 55 pytest cases (localhost:8001 with per-test XFF + public URL for CORS) + unit tests of lead_mailer with resend.Emails.send monkeypatched. 54/55 pass; the one failure is from the platform ingress, not the app: the Emergent preview ingress adds 'access-control-allow-origin: *' to actual (non-preflight) responses. The backend itself never sends ACAO to evil.com (checked on localhost), and preflight from evil.com gets 400 with no ACAO, so browsers still block cross-origin JSON POSTs.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/lead (public preview URL)", "issue": "Preview ingress injects ACAO:* plus ACAH/ACAM:* on non-preflight responses (also on /api/status 404). The app's CORSMiddleware is correct: preflight from https://evil.com returns 400 with no ACAO, and preflight from the preview origin returns 200 with an exact-origin ACAO. This is an infra limitation; check it again on the production domain."},
+      {"endpoint": "POST /api/lead", "issue": "consent uses lax pydantic bool, so the string \"true\" and the number 1 are accepted as consent=true. The spec says consent must be true. Use StrictBool if a literal JSON true is required."},
+      {"endpoint": "POST /api/lead", "issue": "The rate limiter counts honeypot and 400 requests toward the 5/10min budget. This is probably intended (anti-abuse); noted only."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_lead_api.py", "/app/test_reports/pytest/pytest_lead.xml"],
+  "action_items": [
+    "Optional: switch consent to StrictBool or Literal[True] so string/number consent is rejected",
+    "Note for user: the ACAO:* on preview responses comes from the platform ingress, not the app"
+  ],
+  "critical_code_review_comments": [
+    "frontend/.env REACT_APP_BACKEND_URL (build-foundation-28...) differs from the host in CORS_ORIGINS (2c20ef0c...). Both hosts reach the same backend. If the UI is served from build-foundation-28 and calls itself, the request is same-origin and fine. Make sure CORS_ORIGINS lists every origin the site is actually served from, including the production domain.",
+    "submitLead.js uses import.meta.env.REACT_APP_BACKEND_URL. This is correct because Vite has envPrefix REACT_APP_. It returns {ok,error} on all paths (network error, non-JSON, non-2xx).",
+    "Old DEBUGXFF log lines from earlier debugging are still in backend logs (the code is already removed). They contain only XFF IPs, no payloads or keys.",
+    "Header injection is guarded: newline in firstName/lastName/email/vehicleYear/Make/Model returns 400; control chars are stripped elsewhere; notes keep \\n/\\t; HTML is escaped via html.escape."
+  ],
+  "updated_files": ["/app/backend/tests/test_lead_api.py"],
+  "success_rate": {"backend": "98% (54/55; the 1 failure is platform ingress CORS)", "frontend": "N/A (skipped by request)"},
+  "seed_data_creation": "None",
+  "test_credentials": "None required; /app/memory/test_credentials.md not needed",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && sudo supervisorctl restart backend && python -m pytest tests/test_lead_api.py. A restart resets the in-memory limiter. Tests hit localhost:8001 with a unique X-Forwarded-For per test; TRUSTED_PROXY_HOPS=3 picks forwarded[-3] (verified the real client IP is used and spoofed XFF is ignored via the public URL). Once RESEND_API_KEY and LEAD_TO_EMAIL are set, TestNoKey expectations (500) must be changed to 200."
+}

@@ -1,7 +1,7 @@
 import re
 from typing import Annotated, Literal, Optional, Union
 
-from pydantic import BaseModel, BeforeValidator, ConfigDict, EmailStr, Field, field_validator
+from pydantic import BaseModel, BeforeValidator, ConfigDict, EmailStr, Field, StrictBool, field_validator
 
 MAX_STR = 200
 MAX_NOTES = 2000
@@ -48,7 +48,7 @@ Required = Field(min_length=1)
 class _Base(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
-    consent: bool
+    consent: StrictBool
     source: Optional[Str] = None
     website: Optional[str] = None
 
