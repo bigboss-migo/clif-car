@@ -40,6 +40,11 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - Content in pages/process/processContent.js; sections in pages/process/*.jsx
 - Open placeholder: '[CONFIRM: FICO floor]' bullet; hero image still placeholder in site.js
 
+## Implemented — Calculator logic (2026-06)
+- src/config/finance.js: credit tiers, PROVISIONAL illustrative 50-state + DC fee/tax table, unknown-state fallback, lease tax methods, calculator defaults
+- src/lib/finance.js: pure calcFinance / calcLease (brokerFee from site.js); lease dueAtSigning = cashDown + first payment + upfront tax + title/reg
+- Vitest: src/lib/finance.test.js (`yarn test`, 10 passing)
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required
