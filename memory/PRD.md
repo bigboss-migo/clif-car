@@ -35,6 +35,11 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - frontend/src/lib/submitLead.js; backend/.env.example; README Resend setup
 - RESEND_API_KEY / LEAD_TO_EMAIL empty: user will add later (sends return 500 until then)
 
+## Implemented — Process page (2026-06)
+- /process: PageHero, At a Glance (3 steps), Step by Step (4 timeline rows), Dealership vs brand comparison table, ClosingCTA
+- Content in pages/process/processContent.js; sections in pages/process/*.jsx
+- Open placeholder: '[CONFIRM: FICO floor]' bullet; hero image still placeholder in site.js
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required
