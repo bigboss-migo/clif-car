@@ -1,0 +1,24 @@
+{
+  "summary": "Frontend-only test of the /contact 2-step lead submission (Playwright at 1920 and 390). Everything requested works. Happy path with a mocked ok:true: the overlay appears in about 0.09s and the steps advance every 900ms (active -> done, then the next one becomes active). The overlay stays up for about 5s (at least 4.8s). Body overflow is hidden while it is up and restored to '' afterwards. Success panel heading reads 'Thanks, Ann' (shown uppercase by CSS) and includes the phone tel link plus /process and /calculator links; /process navigation was checked. Payload is correct: type lead, source contact, all fields from both steps, vehicleModel holds the trimmed custom text and there is no vehicleModelCustom key, referralName is sent only for Friend/Referral ('' otherwise), website is '', utm_* and quotedPayment come from the URL. Real backend returned 500 (1 request used). The overlay closed after 4.98s and the exact error message showed with a tel link. All Step 1 and Step 2 values were kept and the form could be resubmitted. Mocked 400 {ok:false} and a network abort both show the error banner. The submit button is disabled while sending, and a forced click plus requestSubmit plus Enter sent only 1 request. Honeypot is at left -9999, inside an aria-hidden wrapper, tabIndex -1; when filled programmatically the payload includes website='spam.com'. Step 1 validation still blocks Next (cleared email shows 'Email is required.' and the banner). Step 2 empty submit shows the banner and 11 errors with no request sent. Mobile 390: overlay card fits (20-370px), no horizontal overflow. No 'Send This Quote' button anywhere. Console errors: only the expected 'Failed to load resource' entries from the 500/400/abort tests.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "SendingOverlay", "issues": ["Step 5 'Sending it to the team' stays 'active' and never turns into a green check before the success panel replaces the form. This is cosmetic and optional."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "LeadForm.jsx: the sendError string state is only used as a boolean flag; the banner hard-codes its own text. Minor duplication.",
+    "lead-send-error stays visible after the user clicks Back to Step 1. This is acceptable, but it could be cleared on Back.",
+    "frontend/.env REACT_APP_BACKEND_URL (build-foundation-28 domain) is different from the preview origin (2c20ef0c). Real requests still worked (500 returned with CORS OK), so no action is needed in preview."
+  ],
+  "updated_files": ["/app/test_reports/iteration_11.json"],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Lead submission was fully verified in iteration 11 using page.route('**/api/lead') mocks with an ACAO '*' header. Only 1 real /api/lead call was used (rate limit is 5 per 10 min per IP). Fill helper: Step 1 as in iteration 9; Step 2 selects are field-vehicleYear/Make/Model/Color, acquisition, budget, downPayment, creditRange, timeline, tradeIn, heardAbout, plus field-vehicleModelCustom and field-referralName when they are shown."
+}

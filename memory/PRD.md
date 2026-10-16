@@ -66,12 +66,17 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - config/formOptions.js (years, makes, colors, budget/down/credit/timeline/trade-in/heard-about options) + config/vehicleModels.js
 - Step2.jsx with dependent make/model (+ Other custom model), conditional referral name, notes; validateStep2; Back/Next state preserved
 - Query prefill normalized onto options (make/model/budget brackets)
-- Send My Request validates only; submission (submitLead + vehicleModelCustom mapping) pending next prompt
 
 ## Implemented — Calculator lease mode (2026-06)
 - LeaseFields, LeaseResults (summary: effective payment, per $1k MSRP / 1% rule), MoneyFactorField (Edit/Auto), ResidualSlider
 - Separate finance vs lease keys (price/cashDown/term vs leasePrice/leaseCashDown/leaseTerm); shared trade-in, incentives, state, tier
 - leaseTaxMethodLabels in config; acquisition fee default 995
+
+## Implemented — Contact submission flow (2026-06)
+- Final submit validates Step 1 (returns to Step 1 on failure) + Step 2, buildLeadPayload -> submitLead (source 'contact', UTM, quotedPayment, honeypot website)
+- SendingOverlay (5-step checklist, 900ms steps, 4.8s minimum), SuccessPanel ('Thanks, {firstName}'), failure banner keeps data
+- Real sends need RESEND_API_KEY + LEAD_TO_EMAIL in backend/.env (currently empty -> failure banner)
+- User decision: NO 'Send This Quote' calculator->contact prefill button
 
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
