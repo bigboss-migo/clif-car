@@ -5,25 +5,31 @@ import { Logo } from "@/components/layout/Logo";
 import { PrimaryButton } from "@/components/buttons";
 import { FooterLegal } from "@/components/layout/FooterLegal";
 
-const heading = "mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary";
-const link = "text-sm opacity-80 transition-opacity hover:opacity-100";
+const heading = "mb-5 text-[0.7rem] font-bold tracking-[0.32em] text-primary";
+const link = "text-sm text-ink-muted transition-colors hover:text-ink-foreground";
+
+const FooterColumn = ({ title, testId, children }) => (
+  <nav aria-label={title} data-testid={testId}>
+    <h2 className={heading}>{title}</h2>
+    <ul className="space-y-3">{children}</ul>
+  </nav>
+);
 
 export const Footer = () => (
-  <footer data-testid="site-footer" className="border-t-4 border-primary bg-chrome text-chrome-foreground">
-    <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-[2fr_1fr_1fr]">
-      <div>
-        <Logo testId="footer-logo" />
-        <p className="mt-4 max-w-sm text-sm opacity-70">
-          {site.brandName} {site.brandSub} helps you find, finance and drive away in the right car.
-        </p>
-        <a href={site.phoneHref} data-testid="footer-phone-link" className="mt-6 block font-display text-3xl uppercase hover:text-primary">
-          {site.phone}
-        </a>
-        <PrimaryButton to={getStartedHref} className="mt-6" data-testid="footer-get-started-btn">{getStartedLabel}</PrimaryButton>
-      </div>
-      <nav aria-label="Explore" data-testid="footer-explore">
-        <h2 className={heading}>Explore</h2>
-        <ul className="space-y-3">
+  <footer data-testid="site-footer" className="border-t border-ink-foreground/10 bg-ink pb-[calc(72px+env(safe-area-inset-bottom))] text-ink-foreground md:pb-0">
+    <div className="mx-auto max-w-7xl px-5 py-14">
+      <div className="grid gap-10 lg:grid-cols-[1.5fr_0.8fr_0.8fr]">
+        <div>
+          <Logo testId="footer-logo" />
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-muted">
+            {site.brandName} {site.brandSub} helps you find, finance and drive away in the right car.
+          </p>
+          <a href={site.phoneHref} data-testid="footer-phone-link" className="font-display mt-6 block text-3xl transition-colors hover:text-primary md:text-4xl">
+            {site.phone}
+          </a>
+          <PrimaryButton to={getStartedHref} className="mt-6" data-testid="footer-get-started-btn">{getStartedLabel}</PrimaryButton>
+        </div>
+        <FooterColumn title="Explore" testId="footer-explore">
           {navLinks.map((l) => (
             <li key={l.to}><Link to={l.to} className={link} data-testid={`footer-link-${l.to.slice(1)}`}>{l.label}</Link></li>
           ))}
@@ -32,11 +38,8 @@ export const Footer = () => (
               {site.prequalLabel}
             </a>
           </li>
-        </ul>
-      </nav>
-      <nav aria-label="Follow" data-testid="footer-follow">
-        <h2 className={heading}>Follow</h2>
-        <ul className="space-y-3">
+        </FooterColumn>
+        <FooterColumn title="Follow" testId="footer-follow">
           {site.socials.map((s) => (
             <li key={s.label}>
               <a href={s.href} target="_blank" rel="noopener noreferrer" className={link} data-testid={`footer-social-${s.label.toLowerCase()}`}>
@@ -44,9 +47,9 @@ export const Footer = () => (
               </a>
             </li>
           ))}
-        </ul>
-      </nav>
+        </FooterColumn>
+      </div>
+      <FooterLegal />
     </div>
-    <FooterLegal />
   </footer>
 );

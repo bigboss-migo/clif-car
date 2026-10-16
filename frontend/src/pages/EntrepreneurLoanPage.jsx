@@ -8,6 +8,7 @@ export default function EntrepreneurLoanPage() {
       eyebrow="Entrepreneur Loan"
       title="Entrepreneur Loan"
       text="Entrepreneur loan page content coming soon."
+      description="Vehicle financing options built for entrepreneurs and self-employed buyers."
       image={site.heroImages.entrepreneurLoan}
     />
   );

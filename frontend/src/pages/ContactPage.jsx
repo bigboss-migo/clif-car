@@ -11,10 +11,11 @@ export default function ContactPage() {
       eyebrow="Contact"
       title="Contact"
       text="Contact page content coming soon."
+      description="Get in touch with our team to start finding your next car."
       image={site.heroImages.contact}
     >
       <ClosingCTA id="get-started" heading="Get Started" body="Get started content coming soon.">
-        <PrequalButton variant="primary" />
+        <PrequalButton variant="secondary" />
         <SecondaryButton href={site.phoneHref} data-testid="contact-call-btn">Call {site.phone}</SecondaryButton>
       </ClosingCTA>
     </PlaceholderPage>

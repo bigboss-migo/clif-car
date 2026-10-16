@@ -2,39 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Temporary placeholder theme: light page, bright green accent, dark header/footer, square feel. */
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 7%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
-    --primary: 142 90% 45%;
-    --primary-foreground: 0 0% 5%;
-    --secondary: 0 0% 94%;
-    --secondary-foreground: 0 0% 7%;
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 38%;
-    --accent: 142 90% 45%;
-    --accent-foreground: 0 0% 5%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 86%;
-    --input: 0 0% 86%;
-    --ring: 142 90% 45%;
-    --chrome: 0 0% 7%;
-    --chrome-foreground: 0 0% 98%;
-    --radius: 0rem;
+    --background: oklch(98% .004 150);
+    --foreground: oklch(20% .006 150);
+    --surface: oklch(95% .006 150);
+    --card: oklch(99% .002 150);
+    --card-foreground: var(--foreground);
+    --popover: oklch(99% .002 150);
+    --popover-foreground: var(--foreground);
+    --primary: oklch(73% .23 142);
+    --ring: oklch(73% .23 142);
+    --primary-foreground: oklch(18% .01 150);
+    --secondary: oklch(94% .005 260);
+    --secondary-foreground: var(--foreground);
+    --muted: oklch(94% .005 260);
+    --muted-foreground: oklch(48% .01 260);
+    --accent: oklch(93% .012 50);
+    --accent-foreground: var(--foreground);
+    --border: oklch(88% .006 260);
+    --input: oklch(86% .006 260);
+    --destructive: oklch(60% .21 25);
+    --destructive-foreground: oklch(98% .004 150);
+    --ink: oklch(20% .005 150);
+    --ink-foreground: oklch(98% .004 150);
+    --ink-muted: oklch(74% .01 150);
+    --radius: 0.25rem;
+    --header-h: 72px;
   }
 
-  * {
-    @apply border-border;
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--header-h) + 16px);
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
     margin: 0;
+    overflow-x: hidden;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: "Figtree", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 767px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+@layer utilities {
+  .stage-gradient {
+    background-image:
+      radial-gradient(
+        120% 90% at 50% 0%,
+        color-mix(in oklab, var(--primary) 12%, transparent) 0%,
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        var(--background) 0%,
+        color-mix(in oklab, var(--background) 92%, black) 100%
+      );
   }
 }

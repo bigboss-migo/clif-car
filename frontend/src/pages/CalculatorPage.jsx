@@ -8,6 +8,7 @@ export default function CalculatorPage() {
       eyebrow="Calculator"
       title="Calculator"
       text="Calculator page content coming soon."
+      description="Estimate your monthly car payment before you start shopping."
       image={site.heroImages.calculator}
     />
   );

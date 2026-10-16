@@ -1,24 +1,27 @@
 import { ExternalLink } from "lucide-react";
 import site from "@/config/site";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/buttons";
+import { navLinkClass, mobileRowClass } from "@/components/layout/navStyles";
 
 const variants = {
-  primary: "bg-primary px-5 py-3 text-primary-foreground hover:bg-primary/85",
-  secondary: "border-2 border-current px-5 py-3 hover:bg-foreground/10",
-  nav: "border border-primary px-3 py-2 text-primary hover:bg-primary hover:text-primary-foreground",
-  mobile: "w-full border border-primary px-5 py-4 text-primary hover:bg-primary hover:text-primary-foreground",
+  primary: cn(buttonVariants.primary, "inline-flex items-center justify-center gap-2"),
+  secondary: cn(buttonVariants.secondary, "inline-flex items-center justify-center gap-2"),
+  nav: cn(navLinkClass(false), "inline-flex items-center gap-1.5"),
+  mobile: cn(mobileRowClass(false), "flex w-full items-center justify-between"),
 };
 
-export const PrequalButton = ({ variant = "primary", className = "", ...props }) => (
+export const PrequalButton = ({ variant = "primary", className, ...props }) => (
   <a
     href={site.prequalUrl}
     target="_blank"
     rel="noopener noreferrer"
     title={site.prequalNote}
     data-testid={`prequal-button-${variant}`}
-    className={`inline-flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide transition-colors ${variants[variant]} ${className}`}
+    className={cn(variants[variant], className)}
     {...props}
   >
     {site.prequalLabel}
-    <ExternalLink aria-hidden="true" className="h-4 w-4" />
+    <ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
   </a>
 );
