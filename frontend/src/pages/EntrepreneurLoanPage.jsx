@@ -5,6 +5,7 @@ import { FactStrip } from "@/pages/entrepreneur/FactStrip";
 import { WhatItIs } from "@/pages/entrepreneur/WhatItIs";
 import { WhoItsFor } from "@/pages/entrepreneur/WhoItsFor";
 import { HowItWorks } from "@/pages/entrepreneur/HowItWorks";
+import { FAQ } from "@/pages/entrepreneur/FAQ";
 
 export default function EntrepreneurLoanPage() {
   return (
@@ -24,6 +25,7 @@ export default function EntrepreneurLoanPage() {
       <WhatItIs />
       <WhoItsFor />
       <HowItWorks />
+      <FAQ />
     </div>
   );
 }

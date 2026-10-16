@@ -53,7 +53,8 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 ## Implemented — Entrepreneur Loan page (2026-06)
 - /entrepreneur-loan: hero, fact strip, What It Is, Who It's For cards, How It Works + CTAs (pages/entrepreneur/*)
 - PageHero h1 now text-4xl on mobile (sm:text-5xl md:text-7xl) to prevent long-word overflow
-- Pending: newsletter form, calculator embed, FAQ
+- FAQ accordion added (6 Qs on documents, credit, credit checks, timing, time in business, states) with [CONFIRM] markers
+- Pending: newsletter form, calculator embed
 
 ## Implemented — Contact page + lead form Step 1 (2026-06)
 - /contact: hero, contact cards (phone/socials/prequal), #get-started form section with progress bar
