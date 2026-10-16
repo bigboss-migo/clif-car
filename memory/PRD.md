@@ -50,6 +50,11 @@ Build a foundation scaffold: React + Vite + Tailwind + React Router. No backend 
 - Lease toggle present; lease fields/results pending (Prompt 6B)
 - lib/format.js for USD/percent display; negative input blocked
 
+## Implemented — Entrepreneur Loan page (2026-06)
+- /entrepreneur-loan: hero, fact strip, What It Is, Who It's For cards, How It Works + CTAs (pages/entrepreneur/*)
+- PageHero h1 now text-4xl on mobile (sm:text-5xl md:text-7xl) to prevent long-word overflow
+- Pending: newsletter form, calculator embed, FAQ
+
 ## Backlog
 - P1: Real page content per route; finalize theme tokens
 - P2: Backend work when required
