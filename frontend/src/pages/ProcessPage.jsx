@@ -4,7 +4,7 @@ import { Highlight, PageHero } from "@/components/PageHero";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { PrequalButton } from "@/components/PrequalButton";
 import { AtAGlance } from "@/pages/process/AtAGlance";
-import { StepByStep } from "@/pages/process/StepByStep";
+import { QuoteForm } from "@/pages/process/quote/QuoteForm";
 import { Comparison } from "@/pages/process/Comparison";
 
 export default function ProcessPage() {
@@ -22,7 +22,7 @@ export default function ProcessPage() {
         intro="No dealership runaround, no guessing games. One team handles sourcing, funding and delivery — and you see every number before you commit."
       />
       <AtAGlance />
-      <StepByStep />
+      <QuoteForm />
       <Comparison />
       <ClosingCTA
         heading={`Start with ${site.ownerFirstName} today`}

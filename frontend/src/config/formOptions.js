@@ -39,3 +39,9 @@ export const tradeInOptions = ["No trade-in", "Yes, paid off", "Yes, I still owe
 
 export const REFERRAL_OPTION = "Friend/Referral";
 export const heardAboutOptions = ["Instagram", "TikTok", "YouTube", "Google search", REFERRAL_OPTION, "Other"];
+
+// Editable option lists for the Process-page quote form (/process).
+export const carTypeOptions = ["Luxury", "Sports / Performance", "Exotic", "Electric", "Hybrid", "Everyday / Economy", "Off-road / Utility"];
+export const conditionOptions = ["New", "Used", "Certified Pre-Owned", "No preference"];
+export const bodyStyleOptions = ["Sedan", "SUV", "Crossover", "Coupe", "Convertible", "Hatchback", "Wagon", "Truck", "Van / Minivan", "No preference"];
+export const transmissionOptions = ["Automatic", "Manual", "No preference"];
