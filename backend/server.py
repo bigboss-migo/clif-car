@@ -19,7 +19,8 @@ from rate_limit import RateLimiter  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 logger = logging.getLogger("lead")
 
-MAX_BODY_BYTES = 20 * 1024
+MAX_BODY_BYTES = 20 * 1024  # everything except photos
+MAX_UPLOAD_BYTES = 12 * 1024 * 1024  # whole request, photos included
 payload_adapter = TypeAdapter(Payload)
 limiter = RateLimiter(limit=5, window_seconds=600)
 
@@ -68,14 +69,17 @@ def first_error(exc: ValidationError) -> str:
 async def read_json(request: Request):
     if "application/json" not in request.headers.get("content-type", ""):
         raise ValueError("Content-Type must be application/json")
-    if int(request.headers.get("content-length") or 0) > MAX_BODY_BYTES:
+    if int(request.headers.get("content-length") or 0) > MAX_UPLOAD_BYTES:
         raise ValueError("Request body too large")
     body = await request.body()
-    if len(body) > MAX_BODY_BYTES:
+    if len(body) > MAX_UPLOAD_BYTES:
         raise ValueError("Request body too large")
     data = json.loads(body)
     if not isinstance(data, dict):
         raise ValueError("Body must be a JSON object")
+    # Only the "photos" array may exceed the small limit.
+    if len(body) > MAX_BODY_BYTES and len(json.dumps({k: v for k, v in data.items() if k != "photos"})) > MAX_BODY_BYTES:
+        raise ValueError("Request body too large")
     return data
 
 

@@ -1,10 +1,14 @@
+import base64
+import binascii
 import re
 from typing import Annotated, Literal, Optional, Union
 
-from pydantic import BaseModel, BeforeValidator, ConfigDict, EmailStr, Field, StrictBool, field_validator
+from pydantic import AfterValidator, BaseModel, BeforeValidator, ConfigDict, EmailStr, Field, StrictBool, field_validator
 
 MAX_STR = 200
 MAX_NOTES = 2000
+MAX_PHOTOS = 5
+MAX_PHOTO_BYTES = 3 * 1024 * 1024  # decoded size per photo
 _CTRL = re.compile(r"[\x00-\x1f\x7f-\x9f]")
 _CTRL_KEEP_LINES = re.compile(r"[\x00-\x08\x0b-\x1f\x7f-\x9f]")  # keeps \t and \n
 
@@ -38,7 +42,34 @@ def _clean_header(v):
     return _clean(v)
 
 
+def photo_type(raw: bytes) -> Optional[str]:
+    """File extension from magic bytes (never trust the client's filename or MIME type)."""
+    if raw.startswith(b"\xff\xd8\xff"):
+        return "jpg"
+    if raw.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "png"
+    if raw[:4] == b"RIFF" and raw[8:12] == b"WEBP":
+        return "webp"
+    return None
+
+
+def _check_photo(v: str) -> str:
+    """A photo is a bare base64 string (no data: prefix) holding a JPEG, PNG or WebP."""
+    if len(v) > MAX_PHOTO_BYTES * 4 // 3 + 8:
+        raise ValueError("photo is too large (3 MB max)")
+    try:
+        raw = base64.b64decode(v, validate=True)
+    except (binascii.Error, ValueError):
+        raise ValueError("photo is not valid base64")
+    if len(raw) > MAX_PHOTO_BYTES:
+        raise ValueError("photo is too large (3 MB max)")
+    if photo_type(raw) is None:
+        raise ValueError("photo must be a JPEG, PNG or WebP image")
+    return v
+
+
 Str = Annotated[str, BeforeValidator(_clean)]
+Photo = Annotated[str, AfterValidator(_check_photo)]
 HeaderStr = Annotated[str, BeforeValidator(_clean_header)]
 NotesStr = Annotated[str, BeforeValidator(_clean_notes)]
 Email = Annotated[EmailStr, BeforeValidator(_clean_header)]
@@ -86,6 +117,21 @@ class LeadPayload(_Base):
     referralName: Optional[Str] = None
     notes: Optional[NotesStr] = None
     quotedPayment: Optional[Str] = None
+    # Process-page quote form
+    carType: Optional[Str] = None
+    condition: Optional[Str] = None
+    bodyStyle: Optional[Str] = None
+    transmission: Optional[Str] = None
+    colorChoice1: Optional[Str] = None
+    colorChoice2: Optional[Str] = None
+    colorChoice3: Optional[Str] = None
+    tradeInYear: Optional[Str] = None
+    tradeInMake: Optional[Str] = None
+    tradeInMileage: Optional[Str] = None
+    tradeInVin: Optional[Str] = None
+    tradeInHasLoan: Optional[StrictBool] = None
+    tradeInAmountOwed: Optional[Str] = None
+    photos: Optional[list[Photo]] = Field(default=None, max_length=MAX_PHOTOS)
     utm_source: Optional[Str] = None
     utm_medium: Optional[Str] = None
     utm_campaign: Optional[Str] = None
