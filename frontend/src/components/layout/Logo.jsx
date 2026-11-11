@@ -5,6 +5,6 @@ const LOGO_URL = "https://imagedelivery.net/qPl4NOqbLb6xIvDbtIUFUw/dd7a761d-6cc1
 
 export const Logo = ({ testId = "logo" }) => (
   <Link to="/process" data-testid={testId} className="flex items-center" aria-label={site.brandName}>
-    <img src={LOGO_URL} alt={site.brandName} className="h-10 w-auto md:h-12" />
+    <img src={LOGO_URL} alt={site.brandName} className="-my-16 h-[9.5rem] w-auto md:h-56" />
   </Link>
 );
