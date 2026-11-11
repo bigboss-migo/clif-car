@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import site from "@/config/site";
 
-const LOGO_URL = "https://imagedelivery.net/qPl4NOqbLb6xIvDbtIUFUw/85525cd5-b924-441d-e1d8-b95bfdee5700/public";
+const LOGO_URL = "https://imagedelivery.net/qPl4NOqbLb6xIvDbtIUFUw/dd7a761d-6cc1-4452-c4d2-9163fb414800/public";
 
 export const Logo = ({ testId = "logo" }) => (
   <Link to="/process" data-testid={testId} className="flex items-center" aria-label={site.brandName}>
