@@ -14,9 +14,6 @@ const site = {
   brokerFee: 595,
   socials: [
     { label: "Instagram", href: "#" },
-    { label: "TikTok", href: "#" },
-    { label: "YouTube", href: "#" },
-    { label: "Snapchat", href: "#" },
     { label: "X", href: "#" },
     { label: "LinkedIn", href: "#" },
   ],
