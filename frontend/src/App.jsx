@@ -4,6 +4,8 @@ import ProcessPage from "@/pages/ProcessPage";
 import EntrepreneurLoanPage from "@/pages/EntrepreneurLoanPage";
 import CalculatorPage from "@/pages/CalculatorPage";
 import ContactPage from "@/pages/ContactPage";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
+import TermsOfUsePage from "@/pages/TermsOfUsePage";
 
 export default function App() {
   return (
@@ -15,6 +17,8 @@ export default function App() {
           <Route path="/entrepreneur-loan" element={<EntrepreneurLoanPage />} />
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms-of-use" element={<TermsOfUsePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
