@@ -22,7 +22,7 @@ export default function ProcessPage() {
         intro="Instant Drive Autos helps you find a car that fits your budget. Tell us what you’re looking for, and we’ll work with our dealership partners to find options you can compare before you decide."
       />
       <AtAGlance />
-      <StepByStep />
+      <QuoteForm />
       <Comparison />
       <ClosingCTA
         heading={`Start with ${site.ownerFirstName} today`}
