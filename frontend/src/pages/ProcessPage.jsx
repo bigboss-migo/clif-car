@@ -4,7 +4,7 @@ import { Highlight, PageHero } from "@/components/PageHero";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { PrequalButton } from "@/components/PrequalButton";
 import { AtAGlance } from "@/pages/process/AtAGlance";
-import { StepByStep } from "@/pages/process/StepByStep";
+import { QuoteForm } from "@/pages/process/quote/QuoteForm";
 import { Comparison } from "@/pages/process/Comparison";
 
 export default function ProcessPage() {
