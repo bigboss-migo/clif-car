@@ -4,7 +4,7 @@ import { Highlight, PageHero } from "@/components/PageHero";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { PrequalButton } from "@/components/PrequalButton";
 import { AtAGlance } from "@/pages/process/AtAGlance";
-import { QuoteForm } from "@/pages/process/quote/QuoteForm";
+import { StepByStep } from "@/pages/process/StepByStep";
 import { Comparison } from "@/pages/process/Comparison";
 
 export default function ProcessPage() {
@@ -19,14 +19,14 @@ export default function ProcessPage() {
         image={site.heroImages.process}
         eyebrow="The Process"
         title={<>Work with {site.ownerFirstName} <Highlight>start to finish</Highlight></>}
-        intro="No dealership runaround, no guessing games. One team handles sourcing, funding and delivery — and you see every number before you commit."
+        intro="Instant Drive Autos helps you find a car that fits your budget. Tell us what you’re looking for, and we’ll work with our dealership partners to find options you can compare before you decide."
       />
       <AtAGlance />
-      <QuoteForm />
+      <StepByStep />
       <Comparison />
       <ClosingCTA
         heading={`Start with ${site.ownerFirstName} today`}
-        body="Tell us the car you want. We'll handle the search, the financing and the delivery, and you'll approve every number along the way."
+        body="Already know the exact model you want? Still deciding between a few options? Tell us where you’re at and how to reach you."
       >
         <PrequalButton variant="secondary" />
       </ClosingCTA>

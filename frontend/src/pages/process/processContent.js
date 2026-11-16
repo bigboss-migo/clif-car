@@ -1,15 +1,15 @@
 export const glanceSteps = [
   {
-    title: "Pin down your exact dream car",
-    body: "We settle the year, make, model, color and spec before anything else happens.",
+    title: "Tell us what you’re looking for.",
+    body: "Share your vehicle preferences, how you plan to pay, and whether you have a trade-in.",
   },
   {
-    title: "Map out the best financing",
-    body: "We compare your strongest options. With the Entrepreneur Loan, no auto credit history is required.",
+    title: "Review your options.",
+    body: "We’ll share available vehicles and walk you through the pricing. If you’re financing or leasing, we’ll help you understand the next steps with our partners.",
   },
   {
-    title: "Get a movie-scene delivery",
-    body: "A video crew and photographers capture your car's arrival, so you keep a clip of the moment forever.",
+    title: "Choose your car.",
+    body: "Once you’ve picked a vehicle, we’ll help coordinate with the dealership to finalize the deal and arrange pickup or delivery where available.",
   },
 ];
 

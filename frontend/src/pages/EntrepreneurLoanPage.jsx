@@ -12,14 +12,14 @@ export default function EntrepreneurLoanPage() {
     <div data-testid="entrepreneur-loan-page">
       <Seo
         title="Entrepreneur Loan"
-        description={`Vehicle financing from ${site.brandName} for business owners and 1099 earners, underwritten on business income and deposits.`}
+        description={`Auto financing for people who work for themselves.`}
       />
       <PageHero
         id="entrepreneur-loan"
         image={site.heroImages.entrepreneurLoan}
         eyebrow="Business & 1099 financing"
-        title={<>The home of <Highlight>Entrepreneur Loans</Highlight></>}
-        intro="Get evaluated on the income your business actually brings in, not just a credit score that was never designed for how entrepreneurs earn."
+        title={<>Own a <Highlight>business</Highlight>, work as a <Highlight>1099</Highlight> contractor, or earn <Highlight>freelance income?</Highlight></>}
+        intro="Instant Drive Autos can help you explore auto financing through our lending partners and understand what information they may need to review your income."
       />
       <FactStrip />
       <WhatItIs />
