@@ -4,8 +4,6 @@ import site from "@/config/site";
 const legalLinks = [
   { label: "Privacy Policy", href: "#" },
   { label: "Terms of Use", href: "#" },
-  { label: "Consumer Disclosures", href: "#" },
-  { label: "Accessibility", href: "#" },
 ];
 
 export const FooterLegal = () => (

@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import site from "@/config/site";
 
-const LOGO_URL = "https://imagedelivery.net/qPl4NOqbLb6xIvDbtIUFUw/dd7a761d-6cc1-4452-c4d2-9163fb414800/public";
-
 export const Logo = ({ testId = "logo" }) => (
-  <Link to="/process" data-testid={testId} className="flex items-center" aria-label={site.brandName}>
-    <img src={LOGO_URL} alt={site.brandName} className="-my-16 h-[9.5rem] w-auto md:h-56" />
+  <Link to="/process" data-testid={testId} className="flex items-center gap-3" aria-label={site.brandName}>
+    <svg viewBox="0 0 48 48" className="h-10 w-10 md:h-12 md:w-12" aria-hidden="true">
+      <rect width="48" height="48" className="fill-primary" />
+      <path d="M12 33 L24 13 L36 33 Z" className="fill-ink" />
+    </svg>
+    <span className="flex flex-col gap-1 leading-none">
+      <span className="font-display text-lg tracking-wide md:text-xl">{site.brandName}</span>
+      <span className="text-[0.65rem] font-bold uppercase tracking-[0.32em] text-primary">{site.brandSub}</span>
+    </span>
   </Link>
 );
