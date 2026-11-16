@@ -38,20 +38,16 @@ export const audiences = [
 
 export const steps = [
   {
-    title: "Tell us about the business",
-    body: "A quick conversation about what you do, how you get paid and the car you have in mind.",
+    title: "Tell us about your income and the car you want.",
+    body: "Share how you earn, what you’re looking for, and what you’re comfortable spending.",
   },
   {
-    title: "We build the file",
-    body: "We organize your deposits, statements and income context into a clear, lender-ready package.",
+    title: "Find out what to prepare.",
+    body: "We’ll help you understand what a lender may request to verify your income and review your application.",
   },
   {
-    title: "We shop the network",
-    body: "Your file goes to lenders who specialize in entrepreneurs, and we compare the offers side by side.",
-  },
-  {
-    title: "Approval and delivery",
-    body: "Once terms are set, we source the vehicle and deliver it to your door.",
+    title: "Review any offers you receive.",
+    body: "Compare the rate, loan term, down payment, and total cost before deciding. If you move forward, we’ll help coordinate the vehicle purchase.",
   },
 ];
 
@@ -59,11 +55,11 @@ export const steps = [
 export const faqs = [
   {
     q: "What documents will I need?",
-    a: "Usually recent business bank statements, proof the business is active (such as registration or an EIN letter) and a valid driver's license. We'll send a short checklist after the first call so nothing is guesswork. [CONFIRM: number of months of statements and exact document list]",
+    a: "Depending on the lender, you may be asked for bank statements, tax returns, or other proof of income.",
   },
   {
-    q: "Do I need a certain credit score?",
-    a: "No perfect score is required. The program is built around business income and deposits, so a thin or bruised credit history doesn't automatically rule you out.",
+    q: "Will there be a credit check?",
+    a: "A lender may check your credit. Review the application disclosures before submitting to see what you’re authorizing.",
   },
   {
     q: "Will you run a credit check?",
@@ -71,11 +67,11 @@ export const faqs = [
   },
   {
     q: "How long does approval take?",
-    a: "Once your documents are in, your file goes out to the lender network and we compare the offers that come back. Timing depends on the lender and how complete the file is. [CONFIRM: typical time from documents to decision]",
+    a: "Timing and availability vary by lender. Tell us where you plan to register the car so we can discuss your options.",
   },
   {
-    q: "How long does my business need to be operating?",
-    a: "Requirements vary by lender. Tell us how long you've been in business on the first call and we'll point you toward the lenders that fit. [CONFIRM: minimum time in business, if any]",
+    q: "Is there a minimum credit score or time in business?",
+    a: "Requirements vary by lender. Tell us how long you've been in business on the first call and we'll point you toward the lenders that fit.",
   },
   {
     q: "Can I use it outside my home state?",

@@ -7,7 +7,7 @@ import { steps } from "@/pages/entrepreneur/content";
 export const HowItWorks = () => (
   <Section data-testid="entrepreneur-how-it-works">
     <Eyebrow>How it works</Eyebrow>
-    <h2 className="mt-4 text-3xl md:text-5xl">Four steps from first call to keys</h2>
+    <h2 className="mt-4 text-3xl md:text-5xl">Three steps from first call to keys</h2>
     <ol className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
       {steps.map((s, i) => (
         <li key={s.title} data-testid={`how-step-${i + 1}`} className="border-t-2 border-foreground pt-6">
