@@ -7,8 +7,8 @@ export const Highlight = ({ children }) => <span className="text-primary">{child
 const HeroBackdrop = ({ image }) =>
   hasImage(image) ? (
     <>
-      <img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-25" />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/70 to-background" />
+      <img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/20 to-background/90" />
     </>
   ) : (
     <div aria-hidden="true" className="stage-gradient absolute inset-0" />
